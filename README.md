@@ -86,8 +86,8 @@ connection is required for the initial download.
 - [x] Download and cache NFL play-by-play data
 - [x] Clean and filter valid run/pass plays
 - [x] Prepare features and target labels
-- [ ] Split training and testing data
-- [ ] Train a logistic regression model
+- [x] Split training and testing data
+- [x] Train a logistic regression model
 - [ ] Evaluate accuracy against a baseline
 - [ ] Implement interactive terminal predictions
 - [ ] Test edge cases and error handling
@@ -136,3 +136,22 @@ After preprocessing the 2025 NFL play-by-play dataset:
 | Run plays | 14,863 (43.08%) |
 | Missing values remaining | 0 |
 | Model input features | 3 |
+
+
+
+### Initial Training Results
+
+| Metric | Value |
+|---|---:|
+| Training plays | 30,928 |
+| Testing plays | 3,574 |
+| Training weeks | 1–17 |
+| Testing weeks | 18–22 |
+| Baseline training accuracy | 56.93% |
+| Logistic regression training accuracy | 61.68% |
+| Accuracy improvement | 4.75 percentage points |
+
+The initial logistic regression model outperformed
+the majority-class baseline using only three pre-snap
+features. These results represent training accuracy,
+not performance on unseen games.
