@@ -84,8 +84,8 @@ connection is required for the initial download.
 ### MVP
 - [x] Set up project dependencies
 - [x] Download and cache NFL play-by-play data
-- [ ] Clean and filter valid run/pass plays
-- [ ] Prepare features and target labels
+- [x] Clean and filter valid run/pass plays
+- [x] Prepare features and target labels
 - [ ] Split training and testing data
 - [ ] Train a logistic regression model
 - [ ] Evaluate accuracy against a baseline
@@ -98,3 +98,41 @@ connection is required for the initial download.
 - [ ] Implement gradient boosting
 - [ ] Tune model hyperparameters
 - [ ] Support multiple seasons
+
+
+
+
+### Data Preprocessing
+
+To clean and inspect the downloaded dataset, run:
+
+```bash
+python src/preprocessing.py
+```
+
+The preprocessing pipeline:
+- Retains only run and pass plays.
+- Selects relevant features and identifiers.
+- Removes missing values and invalid game situations.
+- Encodes runs as 0 and passes as 1.
+- Separates input features from target labels.
+
+The three MVP model features are down, yards to go,
+and distance from the opponent's end zone.
+
+
+
+
+### Dataset Summary
+
+After preprocessing the 2025 NFL play-by-play dataset:
+
+| Metric | Value |
+|---|---:|
+| Original rows | 48,771 |
+| Valid run/pass plays | 34,502 |
+| Removed rows | 14,269 |
+| Pass plays | 19,639 (56.92%) |
+| Run plays | 14,863 (43.08%) |
+| Missing values remaining | 0 |
+| Model input features | 3 |
