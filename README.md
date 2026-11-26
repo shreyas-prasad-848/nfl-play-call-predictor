@@ -43,3 +43,58 @@ src/        Python source code
 tests/      Project tests
 data/       Local data files
 docs/       Planning documents and diagrams
+
+
+
+
+## Setup Instructions
+
+Clone the repository:
+
+```bash
+git clone https://github.com/shreyas-prasad-848/nfl-play-call-predictor.git
+cd nfl-play-call-predictor
+```
+
+Create and activate a virtual environment:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+Install dependencies:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+Download and inspect the NFL play-by-play dataset:
+
+```bash
+python src/data_loader.py
+```
+
+The project downloads the 2025 NFL season and caches
+the dataset locally as a Parquet file. An internet
+connection is required for the initial download.
+
+## Roadmap
+
+### MVP
+- [x] Set up project dependencies
+- [x] Download and cache NFL play-by-play data
+- [ ] Clean and filter valid run/pass plays
+- [ ] Prepare features and target labels
+- [ ] Split training and testing data
+- [ ] Train a logistic regression model
+- [ ] Evaluate accuracy against a baseline
+- [ ] Implement interactive terminal predictions
+- [ ] Test edge cases and error handling
+
+### Future Features
+- [ ] Rank NFL offenses by predictability
+- [ ] Add additional pre-snap features
+- [ ] Implement gradient boosting
+- [ ] Tune model hyperparameters
+- [ ] Support multiple seasons

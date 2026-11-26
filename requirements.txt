@@ -1,3 +1,4 @@
 nflreadpy
 pandas
+pyarrow
 scikit-learn
