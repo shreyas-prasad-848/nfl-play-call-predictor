@@ -16,7 +16,12 @@ COLUMNS = [
 
 def clean_data(data):
     # Only keep plays relevant to binary classification.
-    cleaned = data[data["play_type"].isin(["run", "pass"])]
+    # Use regular-season games so all teams are represented fairly.
+    cleaned = data[
+        (data["season_type"] == "REG")
+        & data["play_type"].isin(["run", "pass"])
+    ]
+    
     cleaned = cleaned[COLUMNS].copy()
 
     cleaned = cleaned.dropna()

@@ -88,7 +88,7 @@ connection is required for the initial download.
 - [x] Prepare features and target labels
 - [x] Split training and testing data
 - [x] Train a logistic regression model
-- [ ] Evaluate accuracy against a baseline
+- [x] Evaluate accuracy against a baseline
 - [ ] Implement interactive terminal predictions
 - [ ] Test edge cases and error handling
 
@@ -125,33 +125,54 @@ and distance from the opponent's end zone.
 
 ### Dataset Summary
 
-After preprocessing the 2025 NFL play-by-play dataset:
+The project uses 2025 NFL regular-season play-by-play data.
 
 | Metric | Value |
 |---|---:|
 | Original rows | 48,771 |
-| Valid run/pass plays | 34,502 |
-| Removed rows | 14,269 |
-| Pass plays | 19,639 (56.92%) |
-| Run plays | 14,863 (43.08%) |
+| Valid regular-season run/pass plays | 32,813 |
+| Removed rows | 15,958 |
+| Pass plays | 18,645 (56.82%) |
+| Run plays | 14,168 (43.18%) |
 | Missing values remaining | 0 |
 | Model input features | 3 |
 
 
 
-### Initial Training Results
+### Model Results
 
-| Metric | Value |
-|---|---:|
-| Training plays | 30,928 |
-| Testing plays | 3,574 |
-| Training weeks | 1–17 |
-| Testing weeks | 18–22 |
-| Baseline training accuracy | 56.93% |
-| Logistic regression training accuracy | 61.68% |
-| Accuracy improvement | 4.75 percentage points |
+The dataset is split chronologically using regular-season
+games to evaluate performance on unseen games.
 
-The initial logistic regression model outperformed
-the majority-class baseline using only three pre-snap
-features. These results represent training accuracy,
-not performance on unseen games.
+| Dataset | Weeks | Plays |
+|---|---|---:|
+| Training | 1–14 | 25,163 |
+| Testing | 15–18 | 7,650 |
+
+| Metric | Training | Testing |
+|---|---:|---:|
+| Baseline accuracy | 57.23% | 55.46% |
+| Logistic regression accuracy | 61.48% | 61.44% |
+| Improvement (percentage points) | 4.25 | 5.97 |
+
+The logistic regression model outperformed the baseline
+by 5.97 percentage points on held-out testing data,
+correctly predicting 457 additional plays.
+
+The small difference between training and testing
+accuracy suggests that the model generalizes reasonably
+well to unseen games within the 2025 regular season.
+
+### Confusion Matrix
+
+| | Predicted Run | Predicted Pass |
+|---|---:|---:|
+| Actual Run | 2,014 | 1,393 |
+| Actual Pass | 1,557 | 2,686 |
+
+### Classification Metrics
+
+| Play Type | Precision | Recall | F1-score |
+|---|---:|---:|---:|
+| Run | 0.56 | 0.59 | 0.58 |
+| Pass | 0.66 | 0.63 | 0.65 |
