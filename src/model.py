@@ -1,3 +1,4 @@
+import pandas as pd
 from sklearn.dummy import DummyClassifier
 from sklearn.linear_model import LogisticRegression
 
@@ -38,6 +39,38 @@ def train_model(X_train, y_train):
 
     return model
 
+
+
+
+def predict_play(model, down, yards_to_go, field_position):
+    if down not in [1, 2, 3, 4]:
+        raise ValueError("Down must be between 1 and 4.")
+
+    if not 1 <= yards_to_go <= 99:
+        raise ValueError("Yards to go must be between 1 and 99.")
+
+    if not 1 <= field_position <= 99:
+        raise ValueError("Field position must be between 1 and 99.")
+
+    if yards_to_go > field_position:
+        raise ValueError(
+            "Yards to go cannot exceed the distance to the end zone."
+        )
+
+    # Match the feature names and order used during training.
+    situation = pd.DataFrame(
+        [[down, yards_to_go, field_position]],
+        columns=FEATURES
+    )
+
+    probabilities = model.predict_proba(situation)[0]
+    prediction = model.predict(situation)[0]
+
+    return {
+        "run_probability": probabilities[0],
+        "pass_probability": probabilities[1],
+        "predicted_play": "Pass" if prediction == 1 else "Run"
+    }
 
 if __name__ == "__main__":
     try:
